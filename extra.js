@@ -101,3 +101,163 @@ Telefon raqami formatini tekshirish va xato bo'lsa, qayta so'rash.
       yoki
 941234567
 */
+//MAIN PAGE TO DISPLAY COMMANDS
+function displayCommands(){
+    let request = Number(prompt(```CHOOSE THE NUMBER WHAT DO YOU WANT TO DO>>>> 
+      \n 1. ADD: adding a new contact
+      \n 2. SEARCH: searching for a contact   
+      \n 3. DELETE: deleting a contact       
+      \n 4. LIST: observing all contacts
+      \n 5. HELP: Seeing the existed commands
+      \n 6. EXIT: Exiting the program```))
+      if(isNaN(request)){
+            console.log("You chose incorrectly, select only numbers")
+            displayCommands()
+      }
+      switch(request) {
+      case 1:
+            addcontact(contacts)
+             break;
+      case 2:
+            search(contacts)
+            break;
+      case 3:
+            deletecontact(contacts)
+            break;
+
+      case 4:
+            list(contacts)
+            break;
+      case 5:
+            displayCommands()
+            break;
+      case 6:
+            help()
+            break;
+      default:
+            exit()
+}
+}
+//ADDING A NEW CONTACT
+function addcontact(contacts){
+      let contact = {}
+      name = prompt("ENTER THE NAME OF A CONTACT")
+      if(!isNaN(name)){
+            name = prompt("ENTER THE NAME CORRECTLY WITH LETTERS")
+      }
+      else{
+            contact.name = name
+      }
+      number = prompt("ENTER THE PHONE NUMBER OF A CONTACT")
+      if(number.length < 13 || !number.startsWith("+")){
+            number = prompt("ENTER THE NUMBER CORRECTLY WITH PLUS AT THE BEGINNING AND AT LEAST 13 DIGITS")
+      }
+      else{
+            contact.number = number
+      }
+      contacts.push(contact)
+      console.log("KONTAKT MUVAFFAQIYATLI QO'SHILDI")
+      if(confirm("DO YOU WANT TO ADD ANOTHER NEW CONTACT")){
+            addcontact(contacts)
+      }
+      else{
+            console.log("CONTACT ADDED SUCCESFULLY!")
+            displayCommands()
+      }      
+}
+//SEARCHING A CONTACT
+function search(contacts){
+      let info = prompt("Enter the searched contact phone number's portion>>>>")
+      let check = false
+      let res = []
+      for(let key of contacts){
+            if(key.number.includes(info)){
+                  res.push(key)
+                  check = true
+            }
+            else{
+                  continue
+            }
+      }
+      if(check === false){
+            console.log("NOT FOUND SUCH A CONTACT MATCH")
+            displayCommands()
+      }
+      else{
+            console.log(`FOUNDED CONTACTS: ${res}`)
+            displayCommands()
+      }
+}
+
+//DELETING A CONTACT
+function deletecontact(contacts){
+      let searchname = prompt("ENTER THE NAME TO BE DELETED")
+      let phonenumber = prompt("ENTER THE NUMBER TO BE DELETED")
+      for(let key of contacts){
+            if(key.name === searchname || key.number === phonenumber){
+                  let index = contacts.indexOf(key);
+                  contacts.splice(index, 1);
+                  console.log("CONTACT SUCCESSFULLY DELETED")
+                  displayCommands()
+            }
+            else{
+                  console.log("NOT FOUND SUCH A CONTACT, CHECK THE SPELLING")
+                  displayCommands()
+
+            }
+            
+      }
+}
+//SHOWING THE CONTACT LIST
+function list(contacts){
+      if(contacts.length === 0){
+            console.log("YOU DON'T HAVE ANY CONTACTS YET")
+            displayCommands()
+      }
+      else{
+            console.table(contacts)
+            console.log(contacts)
+            displayCommands()          
+      }
+}
+// HELPING TO FIND THE COMMANDS
+function help(){
+      let rqst = prompt('ENTER WHICH COMMAND DO YOU WANT TO SEE')
+      rqst = rqst.toUpperCase()
+      switch(rqst){
+            case "ADD":
+                  console.log("THIS 'ADD' COMMAND HELPS YOU TO ADD A NEW OR EXISTING CONTACT")
+                  displayCommands()
+                  break;
+            case "SEARCH":
+                  console.log("THIS 'SEARCH' COMMAND HELPS YOU TO SEARCH FOR AN EXISTING CONTACT")
+                  displayCommands()
+                  break;
+            case "DELETE":
+                  console.log("THIS 'DELETE' COMMAND HELPS YOU TO DEELETE AN EXISTING CONTACT RENEW")
+                  displayCommands()
+                  break;
+            case "LIST":
+                  console.log("THIS 'LIST' COMMAND HELPS YOU TO SEE ALL THE CONTACTS")
+                  displayCommands()
+                  break;
+            case "HELP":
+                  console.log("THIS 'HELP' COMMAND HELPS YOU TO FIND ALL THE COMMANDS' FUNCTIONS ")
+                  displayCommands()
+                  break;
+            case "EXIT":
+                  console.log("THIS 'EXIT' COMMAND HELPS YOU TO EXIT THE PROGRAM")
+                  displayCommands()
+                  break;
+            default:
+                  console.log("NOT FOUND SUCH A COMMAND, CHECK THE SPELLING")
+      }
+      displayCommands()
+}
+//EXIT 
+function exit(){
+      console.log("SEE YOU NEXT TIME TO SEE YOU IN OUR PROGRAM!")
+      return "HAVE A NICE DAY!"
+}
+let contacts = []
+displayCommands()

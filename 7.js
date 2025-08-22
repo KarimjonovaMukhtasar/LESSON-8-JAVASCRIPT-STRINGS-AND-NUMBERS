@@ -17,3 +17,15 @@ Chiqish: 4.00 USD
 Kirish: abc
 Chiqish: Noto‘g‘ri ma‘lumot
 */
+function convertcurrency(amount){
+    if(isNaN(amount)){
+       console.log("Noto‘g‘ri ma‘lumot")
+    }
+    else{
+        let res = amount / 12_500
+        console.log(`${(res.toFixed(2))} USD`)
+    }
+}
+let amount = Number(prompt("Enter the amount of Currency"))
+convertcurrency(amount)
+

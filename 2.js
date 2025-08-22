@@ -25,3 +25,22 @@ abc
 5
 Chiqish: Noto‘g‘ri ma‘lumot
 */
+function CalcPrice(price,quantity){
+    let sum = 0
+    if(isNaN(price) || isNaN(quantity)){
+        console.log("NOTO'G'RI MA'LUMOT")
+    }
+    else{
+        sum = sum + price * quantity
+        if(sum > 100_000){
+            let total = sum * 0.9
+            console.log(`${total} (Chegirma qo'llandi: ${sum} * 0.9)`)
+        }
+        else{
+            console.log(`${sum}`)
+        }
+    }
+}
+let price = Number(prompt("NARXNI KIRITING"))
+let quantity = Number(prompt("MIQDORNI KIRITING"))
+CalcPrice(price,quantity)
